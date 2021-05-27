@@ -1,0 +1,27 @@
+<html>
+<head>
+    <!-- 
+        <link> berfungsi untuk Selalu digunakan untuk merujuk file CSS yang berekstensi .css
+        disini kita mencoba untuk mengimport style LeafletJS yang sudah ada.
+    -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- <script> berfungsi untuk mengimport Library LeafletJS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- mengimport leaflet ajax request untuk mendapatkan data spasial secara online -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
+</head>
+<body>
+    <!-- Cara untuk mendifinisikan Map, dan menempatkan style kita sesuaikan -->
+    <div id="map" style="height:90vh;width:90vw;margin:0px auto"></div>
+    <script>
+        // mendefinisikan Leaflet pada variable local, dan setting tampilan map pada koordinat tertentu
+        var map = L.map('map').setView([40.745255, -74.034775], 5);
+        // menambahkan tile layer gratis secara online
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        // melakukan request data pada alamat raw.githubusercontent.com untuk mendapatkan data spasial secara online
+        var geojsonLayer = new L.GeoJSON.AJAX("https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json");
+        // setelah data di dapatkan , kita langsung masukkan kedalam map
+        geojsonLayer.addTo(map);
+    </script>
+</body>
+</html>
